@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: 2ddmac
+Description: A library for controlling SH-Mobile 2DDMAC
+Requires:
+Version: @VERSION@
+Libs: -L${libdir} -l2ddmac
+Libs.private:
+Cflags: -I${includedir}
+
