@@ -183,6 +183,7 @@ err:
 
 void tddmac_close(TDDMAC *tddmac)
 {
+	free(tddmac);
 	uiomux_close(uiomux);
 }
 
