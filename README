@@ -1,0 +1,37 @@
+This library is for controlling the Renesas 2DDMAC via UIO
+
+Requirements
+
+This library requires UIOMux to operate
+
+Usage
+
+There is no formal documentation yet, but the following semi-pseudo code
+should help you get some transactions going.
+
+TDDMAC *tddmac = tddmac_open();
+dmac_id_t dmac_id;
+struct tddmac_buffer src, dst;
+src.pitch = pitch1;
+dst.w = x;
+dst.y = y;
+dst.pitch = pitch2;
+src.fmt = TDDMAC_format_code;
+dmac_id = tddmac_setup(tddmac, &src, &dst);
+tddmac_start(tddmac, dmac_id, src_addr, dst_addr);
+tddmac_wait(tddmac, dmac_id);
+
+Notes
+
+*** src_addr and dst_addr are PHYSICAL addresses ***
+
+*** src.w and src.h are not used ***
+
+*** When TDDMAC_format_code = CbCr420, the value set in dst.w and dst.h
+must be 1/2 of the buffer width/height (ie, for a 100x100 px image, set
+50 and 50 for dst.w and dst.h respectively) ***
+
+*** When TDDMAC_format_code = CbCr422, the value set in and dst.w must
+be 1/2 of the buffer width (ie, for a 100x100 px image,  50 for dst.w
+and 100 for dst.h) ***
+
